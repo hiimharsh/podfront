@@ -1,0 +1,33 @@
+### Files and Folders to be ignore to GitHub / BitBucket ###
+
+# config.js
+# css/
+
+### Node ###
+node_modules
+npm-debug.log*
+logs
+*.log
+
+### Bower ###
+bower_components
+.bower-cache
+.bower-registry
+.bower-tmp
+
+### JSPM ###
+jspm_packages
+
+### Internal folders ###
+private
+db
+css
+
+### Windows ###
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+### Linux ###
+*~

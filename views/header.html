@@ -1,0 +1,19 @@
+<header>
+  <md-toolbar class="md-hue-2">
+      <div class="md-toolbar-tools">
+        <h2>
+          <span>Pod Search<sup>BETA</sup></span>
+        </h2 class="md-block">
+      </div>
+    </md-toolbar>
+    <div class="podfile-upload">
+      <form class="" name="podupload">
+        <md-button class="md-raised" aria-label="Upload PodFile" ng-click="doUpload()">
+          <label class="pod-file-upload">
+            Upload PodFile
+          </label>
+        </md-button>
+        <input id="pod-upload" type="file" name="podfile" onchange="angular.element(this).scope().upload(this.files)"  />
+      </form>
+    </div>
+</header>
