@@ -33,6 +33,18 @@ var navigationservice = angular.module('navigationservice', [])
       }
       return menuname;
     },
+    uploadFile: function(data, request, callback, errCallback) {
+
+      var params = data
+      return $http({
+
+        url: adminURL,
+        method: "POST",
+        data: filter
+
+      }).success(callback).error(errCallback)
+
+    }
 
   };
 });

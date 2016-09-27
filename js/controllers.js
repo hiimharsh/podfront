@@ -10,37 +10,49 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   console.log(container);
 
   $scope.doUpload = function() {
-    $("#pod-upload").click();
+
+    var file = $scope.myFile;
+
+    console.log('file is ' );
+    console.dir(file);
+
+    var uploadUrl = "/fileUpload";
+    NavigationService.uploadFile(file, function(data) {
+
+
+
+    })
+
   };
-  $scope.upload = function(files) {
-    if (files !== null) {
-      var file = files[0];
-      container.addClass('.block');
-      if (file.name == "PodFile") {
-        console.log("cool");
-      } else {
-        console.log("please upload PodFile");
-      }
-    }
-  };
+  // $scope.upload = function(files) {
+  //   if (files !== null) {
+  //     var file = files[0];
+  //     container.addClass('.block');
+  //     if (file.name == "PodFile") {
+  //       console.log("cool");
+  //     } else {
+  //       console.log("please upload PodFile");
+  //     }
+  //   }
+  // };
 
   $scope.pods = [];
   $scope.podResults = [];
 
-  for (var i = 0; i < $scope.pods.length; i++) {
-    var podname = $scope.pods[i];
-    console.log(podname);
-    if (podupload.$valid) {
-      $http.get('http://search.cocoapods.org/api/v1/pods.picky.hash.json?query=' + podname)
-        .success(function(data) {
-          $scope.podResults.concat(data);
-          console.log(data);
-        })
-        .error(function(data) {
-          console.log('Error: ' + data);
-        });
-    }
-  }
+  // for (var i = 0; i < $scope.pods.length; i++) {
+  //   var podname = $scope.pods[i];
+  //   console.log(podname);
+  //   if (podupload.$valid) {
+  //     $http.get('http://search.cocoapods.org/api/v1/pods.picky.hash.json?query=' + podname)
+  //       .success(function(data) {
+  //         $scope.podResults.concat(data);
+  //         console.log(data);
+  //       })
+  //       .error(function(data) {
+  //         console.log('Error: ' + data);
+  //       });
+  //   }
+  // }
 
   //console.log($scope.podResults);
 
