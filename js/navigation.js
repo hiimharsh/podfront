@@ -33,7 +33,7 @@ var navigationservice = angular.module('navigationservice', [])
       }
       return menuname;
     },
-    getGitHubDetails: function(apiUrl, callback) {
+    getCocoapodDetails: function(apiUrl, callback) {
       return $http.get(apiUrl).success(callback).error(function (data, status) {
         console.log("Request failed");
       });

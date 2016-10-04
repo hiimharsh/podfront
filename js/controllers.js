@@ -91,11 +91,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.pods = versions;
   console.log ($scope.pods);
 
-  var githubApi = "";
+  var cocoapodApi = "";
   for (var i = 0; i < $scope.pods.length; i++) {
-    githubApi = "http://search.cocoapods.org/api/v1/pods.picky.hash.json?query=name:"+ $scope.pods[i].item+"&amount=1&start-at=0";
-    console.log("githubApi: ", githubApi)
-    NavigationService.getGitHubDetails(githubApi, function(data) {
+    cocoapodApi = "http://search.cocoapods.org/api/v1/pods.picky.hash.json?query=name:"+ $scope.pods[i].item+"&amount=1&start-at=0";
+    console.log("cocoapodApi: ", cocoapodApi)
+    NavigationService.getGitHubDetails(cocoapodApi, function(data) {
       console.log("data: ", data);
     });
   }
