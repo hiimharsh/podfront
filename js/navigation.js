@@ -7,7 +7,7 @@ if (isproduction) {
 
 var navigationservice = angular.module('navigationservice', [])
 
-.factory('NavigationService', function() {
+.factory('NavigationService', function($http) {
   var navigation = [{
     name: "Home",
     classis: "active",
@@ -33,17 +33,10 @@ var navigationservice = angular.module('navigationservice', [])
       }
       return menuname;
     },
-    uploadFile: function(data, request, callback, errCallback) {
-
-      var params = data
-      return $http({
-
-        url: adminURL,
-        method: "POST",
-        data: filter
-
-      }).success(callback).error(errCallback)
-
+    getGitHubDetails: function(apiUrl, callback) {
+      return $http.get(apiUrl).success(callback).error(function (data, status) {
+        console.log("Request failed");
+      });
     }
 
   };

@@ -13,7 +13,8 @@
             Upload PodFile
           </label>
         </md-button>
-        <input id="pod-upload" type="file" name="podfile" onchange="angular.element(this).scope().upload(this.files)"  />
+        <!-- onchange="angular.element(this).scope().fileUploaded()" -->
+        <input id="pod-upload" type="file" name="podfile" ng-model="myFile"  accept="file/" on-read-file="readContent($fileContent)"/>
       </form>
     </div>
 </header>
