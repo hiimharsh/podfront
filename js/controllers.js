@@ -91,14 +91,43 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.pods = versions;
   console.log ($scope.pods);
 
+  var githubHeaderRe = /https/g;
+  var gitSymbolsRe = /[://]/g;
+  var githubRe = /github.com/g;
+  var dotGitRe = /.git/g;
+
   var cocoapodApi = "";
   for (var i = 0; i < $scope.pods.length; i++) {
     cocoapodApi = "http://search.cocoapods.org/api/v1/pods.picky.hash.json?query=name:"+ $scope.pods[i].item+"&amount=1&start-at=0";
     console.log("cocoapodApi: ", cocoapodApi)
-    NavigationService.getGitHubDetails(cocoapodApi, function(data) {
+    NavigationService.getCocoapodDetails(cocoapodApi, function(data) {
       console.log("data: ", data);
+      let githubUrl = data.allocations[0][5][0].source.git
+      console.log("githubApi: ", githubUrl);
+
+      let githubTwo = githubUrl.split('https://github.com')
+      let githubData = githubTwo[1].split('.git')
+      let repoName = githubData[0].split('/')
+      let githubApiUrl = "https://raw.githubusercontent.com"+githubData[0]+"/master/"+repoName[2]+".podspec"
+      console.log("githubData: ", githubApiUrl);
+        //  .filter(function (item) {
+        //   return !githubRe.test(item) && !dotGitRe.test(item) && !gitSymbolsRe.test(item) && !githubHeaderRe.test(item);
+
+        // })
+
+      NavigationService.getGithubApi(githubApiUrl, function(data) {
+
+        console.log("data in github: ", data)
+
+      })
+
     });
   }
+
+  // NavigationService.getGithubApi(function(data) {
+  //     console.log("data: ", data);
+  // });
+
   };
 
 

@@ -34,10 +34,28 @@ var navigationservice = angular.module('navigationservice', [])
       return menuname;
     },
     getCocoapodDetails: function(apiUrl, callback) {
-      return $http.get(apiUrl).success(callback).error(function (data, status) {
-        console.log("Request failed");
-      });
-    }
 
+      $http({
+          url: apiUrl,
+          method: 'GET',
+          withCredentials: false
+      }).success(callback)
+
+      // return $http.get(apiUrl).success(callback).error(function (data, status) {
+      //   console.log(status, " Request failed");
+      // });
+    },
+    getGithubApi: function(githubApi, callback) {
+
+      $http({
+          url: githubApi,
+          method: 'GET',
+          withCredentials: false
+      }).success(callback)
+
+      // return $http.get("https://api.github.com/repos/SwiftyJSON/SwiftyJSON/contents/SwiftyJSON.podspec").success(callback).error(function (data, status) {
+      //   console.log(status, "Request failed");
+      // });
+    }
   };
 });
