@@ -1,27 +1,27 @@
 <div class="container">
-  <md-card>
+  <md-card ng-repeat="pod in podResults">
     <table>
       <tbody>
         <tr>
-          <th><a href="https://github.com/swifthttp">SwiftHTTP</a></th>
-          <th>Xcode</th>
-          <th>iPhone</th>
-          <th>iWatch</th>
-          <th>iMac</th>
-          <th>Apple TV</th>
+          <th><a href="{{pod.link}}">{{pod.name}}</a></th>
+          <!-- <th>Xcode</th> -->
+          <th ng-if="pod.ios">iPhone</th>
+          <th ng-if="pod.watchos">iWatch</th>
+          <th ng-if="pod.macos">iMac</th>
+          <th ng-if="pod.tvos">Apple TV</th>
         </tr>
         <tr>
-          <td>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words</td>
-          <td>8</td>
-          <td>10.0.2</td>
-          <td>2</td>
-          <td>3</td>
-          <td>8.0.1</td>
+          <td>{{pod.description}}</td>
+          <!-- <td>8</td> -->
+          <td ng-if="pod.ios">{{pod.ios}}</td>
+          <td ng-if="pod.watchos">{{pod.watchos}}</td>
+          <td ng-if="pod.macos">{{pod.macos}}</td>
+          <td ng-if="pod.tvos">{{pod.tvos}}</td>
         </tr>
       </tbody>
     </table>
   </md-card>
-  <md-card>
+  <!-- <md-card>
     <h3 class="podname">SwiftHTTP</h3>
     <p class="link"><a href="https://github.com/swifthttp">https://github.com/swifthttp</a></p>
     <p class="description">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
@@ -44,5 +44,5 @@
       <li><span>Swift:</span> 3</li>
       <li><span>Xcode:</span> 8.0.1</li>
     </ul>
-  </md-card>
+  </md-card> -->
 </div>
