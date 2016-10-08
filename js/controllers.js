@@ -10,63 +10,36 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   console.log(container);
 
   $scope.doUpload = function() {
-
-
     document.getElementById('pod-upload').click()
-      // document.getElementById('pod-upload')
-
-      // console.log('file is ', $scope.myFile);
-
-    // $scope.$apply(function(scope) {
-         // var photofile = element.files[0];
-         // var reader = new FileReader();
-         // reader.onload = function(e) {
-         //    // handle onload
-         // };
-         // reader.readAsDataURL(photofile);
-
-     // });
-
-    // var uploadUrl = "/fileUpload";
-    // NavigationService.uploadFile(file, function(data) {
-
-
-
-    // })
-
   };
 
-  $scope.fileUploaded = function () {
-
-    console.log("file uploaded: ", document.getElementById('pod-upload').files[0])
-    // var fileReader = FileReader()
-    // console.log("file read to: ", fileReader.result)
-
-  }
-
   $scope.pods = [];
+  $scope.podResults = [];
+  var hashRe = /#/;
+
   $scope.readContent = function($fileContent){
 
     console.log("file: ", $fileContent)
-    // $scope.podResults = $fileContent.split('pod ')
     var lines = $fileContent.split('\n')
-    // console.log("results: ", $scope.podResults)
     var re = /pod/ ;
-    var hashRe = /#/ ;
 
     lines = lines.filter (function (item) {
       return re.test(item) && !hashRe.test(item);
     })
-    // console.log("results: ", $scope.podResults)
 
+    getGithubUrl(lines)
+
+  };
+
+  function getGithubUrl(data) {
 
     var versions = [] ;
     var branchRe = /:branch/;
     var cleanRe = /['",]/g ;
 
-    for (var i = 0; i < lines.length; i++) {
-      console.log (lines[i]);
-      var items = lines[i].split(' ');
+    for (var i = 0; i < data.length; i++) {
+      console.log (data[i]);
+      var items = data[i].split(' ');
       var pods = {};
 
       items[3] = items[3].replace(cleanRe, '') ;
@@ -80,64 +53,54 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         pods["version"] = "";
       }
 
-      if (branchRe.test(lines)) {
+      if (branchRe.test(data)) {
         pods["branch"] = items[9];
       }
 
       versions.push(pods);
     }
 
-  // console.log (pods) ;
-  $scope.pods = versions;
-  console.log ($scope.pods);
+    $scope.pods = versions;
+    console.log ($scope.pods);
+    getGithubData()
 
-  // var githubHeaderRe = /https/g;
-  // var gitSymbolsRe = /[://]/g;
-  // var githubRe = /github.com/g;
-  // var dotGitRe = /.git/g;
-
-  var specRe = /s[.]\w+/g;
-
-  var cocoapodApi = "";
-  var specData = [];
-  for (var i = 0; i < $scope.pods.length; i++) {
-    cocoapodApi = "http://search.cocoapods.org/api/v1/pods.picky.hash.json?query=name:"+ $scope.pods[i].item+"&amount=1&start-at=0";
-    console.log("cocoapodApi: ", cocoapodApi)
-    NavigationService.getCocoapodDetails(cocoapodApi, function(data) {
-      console.log("data: ", data);
-      let githubUrl = data.allocations[0][5][0].source.git
-      console.log("githubApi: ", githubUrl);
-
-      let githubTwo = githubUrl.split('https://github.com')
-      let githubData = githubTwo[1].split('.git')
-      let repoName = githubData[0].split('/')
-      let githubApiUrl = "https://raw.githubusercontent.com"+githubData[0]+"/master/"+repoName[2]+".podspec"
-      console.log("githubData: ", githubApiUrl);
-        //  .filter(function (item) {
-        //   return !githubRe.test(item) && !dotGitRe.test(item) && !gitSymbolsRe.test(item) && !githubHeaderRe.test(item);
-
-        // })
-
-      NavigationService.getGithubApi(githubApiUrl, function(data) {
-
-        // console.log("data in github: ", data)
-        specData = data.split('\n')
-        specData = specData.filter(function(item) {
-          return specRe.test(item) && !hashRe.test(item)
-        })
-        console.log("specData: ", specData)
-        formatResults(specData)
-
-      })
-
-    });
   }
 
-  // NavigationService.getGithubApi(function(data) {
-  //     console.log("data: ", data);
-  // });
+  function getGithubData() {
 
-  };
+    for (var i = 0; i < $scope.pods.length; i++) {
+      cocoapodApi = "http://search.cocoapods.org/api/v1/pods.picky.hash.json?query=name:"+ $scope.pods[i].item+"&amount=1&start-at=0";
+      console.log("cocoapodApi: ", cocoapodApi)
+      NavigationService.getCocoapodDetails(cocoapodApi, function(data) {
+        console.log("data: ", data);
+        let githubUrl = data.allocations[0][5][0].source.git
+        console.log("githubApi: ", githubUrl);
+
+        let githubTwo = githubUrl.split('https://github.com')
+        let githubData = githubTwo[1].split('.git')
+        let repoName = githubData[0].split('/')
+        let githubApiUrl = "https://raw.githubusercontent.com"+githubData[0]+"/master/"+repoName[2]+".podspec"
+        console.log("githubData: ", githubApiUrl);
+        getPodspecData(githubApiUrl)
+      })
+    }
+  }
+
+  function getPodspecData(url) {
+
+    var specRe = /s[.]\w+/g;
+    var cocoapodApi = "";
+    var specData = [];
+    NavigationService.getGithubApi(url, function(data) {
+      specData = data.split('\n')
+      specData = specData.filter(function(item) {
+        return specRe.test(item) && !hashRe.test(item)
+      })
+      console.log("specData: ", specData)
+      formatResults(specData)
+    })
+
+  }
 
   function formatResults(data) {
     var results = {};
@@ -208,10 +171,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
   function makeSubstring(text) {
 
-    // console.log("last index: ", text.lastIndexOf('"') - 1)
-    // var startIndex = text.lastIndexOf('"') - 1 || text.lastIndexOf("'") - 1
-    // var startPos = text.substring(text.startIndex + 1)
-    // var endPos = text.lastIndexOf('"') || text.lastIndexOf("'")
     var splitResultOne = text.split("'")
     var splitResultTwo = text.split('"')
     if (splitResultOne[1]) {
@@ -228,39 +187,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     }
 
   }
-
-
-  // $scope.upload = function(files) {
-  //   if (files !== null) {
-  //     var file = files[0];
-  //     container.addClass('.block');
-  //     if (file.name == "PodFile") {
-  //       console.log("cool");
-  //     } else {
-  //       console.log("please upload PodFile");
-  //     }
-  //   }
-  // };
-
-
-  $scope.podResults = [];
-
-  // for (var i = 0; i < $scope.pods.length; i++) {
-  //   var podname = $scope.pods[i];
-  //   console.log(podname);
-  //   if (podupload.$valid) {
-  //     $http.get('http://search.cocoapods.org/api/v1/pods.picky.hash.json?query=' + podname)
-  //       .success(function(data) {
-  //         $scope.podResults.concat(data);
-  //         console.log(data);
-  //       })
-  //       .error(function(data) {
-  //         console.log('Error: ' + data);
-  //       });
-  //   }
-  // }
-
-  //console.log($scope.podResults);
 
 })
 
