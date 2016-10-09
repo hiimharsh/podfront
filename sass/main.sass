@@ -200,3 +200,18 @@ footer
 
 .block
   display: block !important
+
+.cards
+  display: none
+  &:first-child
+    display: block
+  .animate
+    display: block
+    animation: fade-animate 600ms ease-in-out forwards
+
+// ANIMATIONS
+@keyframes fade-animate
+  0%
+    opacity: 0
+  100%
+    opacity: 1

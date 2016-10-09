@@ -64,6 +64,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     console.log ($scope.pods);
     getGithubData()
 
+    _.each($scope.pods, function(data, i) {
+      $timeout(function() {
+        var cards = document.getElementsByClassName("cards");
+        angular.element(cards).eq(i).addClass('animate');
+      }, 500 * i);
+    });
+
   }
 
   function getGithubData() {
