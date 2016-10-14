@@ -23,23 +23,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   function FeedbackController($scope, $mdDialog) {
     $scope.user = {};
     $scope.send = function(data) {
-      if (data.name != undefined) {
-        if (data.email != undefined) {
-          if (data.message != undefined) {
-            //console.log(data);
-            NavigationService.sendMail(
-              data.name,
-              data.email,
-              data.message);
-            $mdDialog.hide();
-          } else {
-            //console.log("no message");
-          }
-        } else {
-          //console.log("no email");
-        }
-      } else {
-        //console.log("no name");
+      if (data.name != undefined && data.email != undefined && data.message != undefined) {
+        //console.log(data);
+        NavigationService.sendMail(
+          data.name,
+          data.email,
+          data.message);
+        $mdDialog.hide();
       }
     };
     $scope.close = function() {
