@@ -1,0 +1,19 @@
+<div class="feedback">
+  <h1 class="text-center">Thanks for coming by</h1>
+  <p class="text-center">Write us something that we can do for you</p>
+  <md-input-container class="md-block" flex-gt-sm>
+    <label>Name</label>
+    <input ng-model="user.name" minlength="2" maxlength="50" ng-pattern="/^.+@.+\..+$/" required>
+  </md-input-container>
+  <md-input-container class="md-block" flex-gt-sm>
+    <label>Email</label>
+    <input ng-model="user.email" minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" required>
+  </md-input-container>
+  <md-input-container class="md-block" flex-gt-sm>
+    <label>Message</label>
+    <textarea ng-model="user.message" md-maxlength="150" rows="3" md-select-on-focus required></textarea>
+  </md-input-container>
+  <div class="send-button text-center">
+    <md-button aria-label="Send" class="md-raised md-primary" ng-click="send(user)">Send</md-button>
+  </div>
+</div>

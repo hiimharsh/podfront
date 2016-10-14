@@ -1,6 +1,6 @@
 angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ngMaterial', 'ngAnimate', 'ngMessages', 'ngAria', 'ngSanitize'])
 
-.controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout, $http) {
+.controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout, $http, $mdDialog) {
   $scope.template = TemplateService.changecontent("home");
   $scope.menutitle = NavigationService.makeactive("Home");
   TemplateService.title = $scope.menutitle;
@@ -9,6 +9,39 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.doUpload = function() {
     document.getElementById('pod-upload').click();
   };
+
+  $scope.openFeedback = function () {
+    $mdDialog.show({
+      controller: FeedbackController,
+      templateUrl: 'views/content/feedback.html',
+      parent: angular.element(document.body),
+      clickOutsideToClose: true,
+      fullscreen: $scope.customFullscreen
+    });
+  };
+
+  function FeedbackController($scope, $mdDialog) {
+    $scope.user = {};
+    $scope.send = function(data) {
+      if (data.name != undefined) {
+        if (data.email != undefined) {
+          if (data.message != undefined) {
+            $mdDialog.hide();
+            console.log(data);
+          } else {
+            //console.log("no message");
+          }
+        } else {
+          //console.log("no email");
+        }
+      } else {
+        //console.log("no name");
+      }
+    };
+    $scope.close = function() {
+      $mdDialog.hide();
+    }
+  }
 
   $scope.pods = [];
   $scope.podResults = [];
