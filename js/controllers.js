@@ -26,8 +26,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       if (data.name != undefined) {
         if (data.email != undefined) {
           if (data.message != undefined) {
+            //console.log(data);
+            NavigationService.sendMail(
+              data.name,
+              data.email,
+              data.message);
             $mdDialog.hide();
-            console.log(data);
           } else {
             //console.log("no message");
           }

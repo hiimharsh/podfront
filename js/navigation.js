@@ -56,6 +56,20 @@ var navigationservice = angular.module('navigationservice', [])
       // return $http.get("https://api.github.com/repos/SwiftyJSON/SwiftyJSON/contents/SwiftyJSON.podspec").success(callback).error(function (data, status) {
       //   console.log(status, "Request failed");
       // });
+    },
+    sendMail: function(fromname, from, text) {
+        var method = 'GET';
+        var url = "https://api.sendgrid.com/api/mail.send.json?";
+        $http({
+            method: method,
+            url: url + "api_user=" +
+                "&api_key=" +
+                "&to=" + ["harshwohlig@gmail.com", "midhetfatema94@gmail.com"] +
+                "&subject=ismypodcompatible Feedback" +
+                "&text=" + text +
+                "&from=" + from +
+                "&fromname=" + fromname
+        });
     }
   };
 });
