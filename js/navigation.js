@@ -39,7 +39,7 @@ var navigationservice = angular.module('navigationservice', [])
           url: apiUrl,
           method: 'GET',
           withCredentials: false
-      }).success(callback)
+      }).success(callback);
 
       // return $http.get(apiUrl).success(callback).error(function (data, status) {
       //   console.log(status, " Request failed");
@@ -51,7 +51,7 @@ var navigationservice = angular.module('navigationservice', [])
           url: githubApi,
           method: 'GET',
           withCredentials: false
-      }).success(callback)
+      }).success(callback);
 
       // return $http.get("https://api.github.com/repos/SwiftyJSON/SwiftyJSON/contents/SwiftyJSON.podspec").success(callback).error(function (data, status) {
       //   console.log(status, "Request failed");
@@ -64,11 +64,13 @@ var navigationservice = angular.module('navigationservice', [])
             method: method,
             url: url + "api_user=" +
                 "&api_key=" +
-                "&to=" + ["harshwohlig@gmail.com", "midhetfatema94@gmail.com"] +
+                "&to=" + "midhetfatema94@gmail.com" +
+                "&to=" + "harshwohlig@gmail.com" +
                 "&subject=ismypodcompatible Feedback" +
                 "&text=" + text +
                 "&from=" + from +
-                "&fromname=" + fromname
+                "&fromname=" + fromname,
+            withCredentials: false
         });
     }
   };
