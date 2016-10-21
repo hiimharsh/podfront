@@ -9,7 +9,7 @@
 	From: Mumbai, India
 
 	Web Developer: Midhet Sulemani
-	Twitter: @
+	Twitter: @itsnotmidget
 	From: Mumbai, India
 
 /* THANKS */
@@ -20,5 +20,5 @@
 	Description: IsMyPodCompatible helps to search pods which are compatible to latest Swift 3 and Xcode 8
 	Last update: 2016/10/21
 	Language: English
-	Doctype: HTML5, CSS3, AngularJS, Bootstrap
-	IDE: Atom
+	Technologies: HTML5, CSS3, AngularJS, Bootstrap
+	IDE: Atom, Sublime Text 3
