@@ -1,0 +1,24 @@
+/* TEAM */
+
+	UI Designer: Harsh Thakkar
+	Twitter: @hiimharsh
+	From: Mumbai, India
+
+	Web Designer: Harsh Thakkar
+	Twitter: @hiimharsh
+	From: Mumbai, India
+
+	Web Developer: Midhet Sulemani
+	Twitter: @
+	From: Mumbai, India
+
+/* THANKS */
+
+
+/* SITE */
+
+	Description: IsMyPodCompatible helps to search pods which are compatible to latest Swift 3 and Xcode 8
+	Last update: 2016/10/21
+	Language: English
+	Doctype: HTML5, CSS3, AngularJS, Bootstrap
+	IDE: Atom

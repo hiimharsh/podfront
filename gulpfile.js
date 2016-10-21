@@ -248,7 +248,7 @@ gulp.task('sass:production', function() {
 gulp.task('sass:development', function() {
     var sass = require('gulp-sass');
     var sourcemaps = require('gulp-sourcemaps');
-    gulp.src('./sass/*.scss')
+    gulp.src(['./sass/*.scss', './sass/*.sass'])
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
         .pipe(sourcemaps.write())
@@ -284,6 +284,10 @@ gulp.task('connect:html', function() {
 });
 gulp.task('connect:js', function() {
     gulp.src('./js/*.js')
+        .pipe(connect.reload());
+});
+gulp.task('connect:humans', function() {
+    gulp.src('./humans.txt')
         .pipe(connect.reload());
 });
 gulp.task('watch:all', function() {

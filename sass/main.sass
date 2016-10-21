@@ -20,6 +20,8 @@ $brand-warning: #ffec39 !default
 $brand-danger: #fc483f !default
 $brand-info: #000072 !default
 
+$brand-color: #204077 !default //rgb(40,53,147)
+
 $facebook: #3a579d !default
 $google: #dd4d3c !default
 $twitter: #49c8f5 !default
@@ -121,7 +123,8 @@ ul
 header
   z-index: 1
   height: 350px
-  background-color: rgb(40,53,147)
+  background-color: $brand-color
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   md-toolbar
     padding: 0 50px
     position: fixed
@@ -135,6 +138,8 @@ header
       ul li
         a
           font-size: 18px
+  md-toolbar.md-hue-2:not(.md-menu-toolbar)
+    background-color: $brand-color !important
   .podfile-upload
     padding-top: 150px
     text-align: center

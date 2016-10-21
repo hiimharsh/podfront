@@ -1,8 +1,8 @@
 var templateservicemod = angular.module('templateservicemod', []);
 templateservicemod.service('TemplateService', function() {
-    this.title = "Home";
+    this.title = "ismypodcompatible";
     this.meta = "Google";
-    this.metadesc = "Home";
+    this.metadesc = "ios pod cocoapods swift xcode apple watchos";
 
     var d = new Date();
     this.year = d.getFullYear();
