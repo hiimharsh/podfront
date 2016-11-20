@@ -45,7 +45,7 @@ firstapp.directive('onReadFile', function ($parse) {
     restrict: 'A',
     scope: false,
     link: function(scope, element, attrs) {
-            var fn = $parse(attrs.onReadFile);
+      var fn = $parse(attrs.onReadFile);
 
       element.on('change', function(onChangeEvent) {
         var reader = new FileReader();
